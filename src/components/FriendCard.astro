@@ -1,0 +1,15 @@
+---
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+const url = new URL(href);
+const domain = url.hostname.replace(/^www\./, "");
+---
+
+<a class="friend-card" href={href} target="_blank" rel="noreferrer">
+  <p class="eyebrow">Friend</p>
+  <h3>{domain}</h3>
+  <p>{href}</p>
+</a>

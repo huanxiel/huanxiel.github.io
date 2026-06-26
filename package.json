@@ -1,0 +1,19 @@
+{
+  "name": "lmf-astro-blog",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "deploy": "npm run build && gh-pages -d dist -b master -r ssh://git@ssh.github.com:443/huanxiel/huanxiel.github.io.git"
+  },
+  "dependencies": {
+    "astro": "^5.13.2"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0",
+    "typescript": "^5.9.2"
+  }
+}

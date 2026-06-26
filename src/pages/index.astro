@@ -1,0 +1,67 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PostCard from "../components/PostCard.astro";
+
+const posts = (await getCollection("posts", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const gallery = [
+  "/images/legacy/qingzi.PNG",
+  "/images/legacy/wing.PNG",
+  "/images/legacy/youqi.jpg"
+];
+---
+
+<BaseLayout title="LMF" description="A blog for long-form posts, notes, and future projects.">
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Blog</p>
+      <h1>Built for future long posts, not just a one-weekend refresh.</h1>
+      <p class="lede">
+        The structure is now Astro, the images came along, and the writing space is ready
+        to get much heavier from here.
+      </p>
+      <div class="hero-actions">
+        <a class="button-primary" href="/about">About</a>
+        <a class="button-secondary" href="/links">Friend Links</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <img class="hero-main" src="/images/legacy/qingzi.PNG" alt="" />
+      <img class="hero-side" src="/images/legacy/wing.PNG" alt="" />
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="section-heading">
+      <p class="eyebrow">Image Archive</p>
+      <h2>Legacy backgrounds, ready for new posts</h2>
+    </div>
+    <div class="gallery-grid">
+      {gallery.map((image) => (
+        <figure class="gallery-item">
+          <img src={image} alt="" loading="lazy" />
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="section-heading">
+      <p class="eyebrow">Posts</p>
+      <h2>Start writing from a cleaner base</h2>
+    </div>
+    <div class="post-grid">
+      {posts.map((post) => (
+        <PostCard
+          href={`/posts/${post.slug}/`}
+          title={post.data.title}
+          description={post.data.description}
+          date={post.data.date.toLocaleDateString("zh-CN")}
+          cover={post.data.cover}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FriendCard from "../components/FriendCard.astro";
+import { friends } from "../data/friends";
+---
+
+<BaseLayout title="Friend Links | LMF" description="Friend links">
+  <section class="hero compact">
+    <div class="hero-copy">
+      <p class="eyebrow">Links</p>
+      <h1>Friend Links</h1>
+      <p class="lede">
+        The old blogroll made the jump. The page stays simple so it can scale as the
+        network grows.
+      </p>
+    </div>
+    <div class="hero-stack" aria-hidden="true">
+      <img src="/images/legacy/youqi.jpg" alt="" />
+      <img src="/images/legacy/sion.PNG" alt="" />
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="friend-grid">
+      {friends.map((friend) => <FriendCard href={friend} />)}
+    </div>
+  </section>
+</BaseLayout>

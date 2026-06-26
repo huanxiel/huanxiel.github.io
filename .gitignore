@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+Thumbs.db
+*.log
+.deploy_git/
+legacy-hexo/
+tips.txt
