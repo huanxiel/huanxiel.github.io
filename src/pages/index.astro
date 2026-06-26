@@ -1,90 +1,86 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import { Icon } from "astro-icon/components";
+import LinkCard from "@/components/mdx/LinkCard.astro";
+import MainCard from "@/components/MainCard.astro";
+import Card from "@/components/temple/Card.astro";
+import CardGroup from "@/components/temple/CardGroup.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
 
-<!doctype html>
-<html lang="zh-CN">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-    <style>
-      .hero-image {
-        margin: 2rem 0;
-        border-radius: 12px;
-        box-shadow: var(--box-shadow);
-      }
-
-      .quick-links {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 1rem;
-        margin: 2rem 0;
-        padding: 0;
-        list-style: none;
-      }
-
-      .quick-links a {
-        display: block;
-        padding: 1rem;
-        border-radius: 12px;
-        background: white;
-        box-shadow: 0 2px 8px rgba(var(--black), 5%);
-        text-decoration: none;
-      }
-
-      .quick-links h3,
-      .quick-links p {
-        margin: 0;
-      }
-
-      .quick-links p {
-        margin-top: 0.4rem;
-        color: rgb(var(--gray));
-        font-size: 0.95rem;
-      }
-
-      @media (max-width: 720px) {
-        .quick-links {
-          grid-template-columns: 1fr;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <Header />
-    <main>
-      <h1>LMF</h1>
-      <p>
-        现在这套站点已经改成官方 Astro blog 路线：内容用 content collections 管，
-        页面结构尽量贴近官方 starter，部署也会交给 GitHub Pages 官方工作流。
-      </p>
-      <p>
-        旧博客里真正值得迁过来的部分也还在：友链、图片资源，以及一个更适合以后写长文的起点。
-      </p>
-      <img class="hero-image" src="/images/legacy/qingzi.PNG" alt="" />
-      <ul class="quick-links">
-        <li>
-          <a href="/blog">
-            <h3>Blog</h3>
-            <p>文章现在统一走官方 blog 内容目录。</p>
+<BaseLayout title="Home">
+  <MainCard
+    title="LMF"
+    description="这个站点现在已经切到 Frosti 主题，友链和旧图保留下来，剩下的位置留给以后更重一点的内容。"
+    image="/images/legacy/qingzi.PNG"
+    infoIcon="lucide:house"
+  >
+    <div class="space-y-8">
+      <section class="space-y-4">
+        <p class="text-base-content/80">
+          这次迁移没有再保留多余的历史结构，而是直接换到一套更完整的博客骨架。
+          现在的重点很简单：把内容、图片和友链放在更稳的地方，然后继续慢慢长。
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a href="/blog" class="btn btn-primary gap-2">
+            <Icon name="lucide:book-open" class="w-4 h-4" />
+            <span>Read the blog</span>
           </a>
-        </li>
-        <li>
-          <a href="/links">
-            <h3>Links</h3>
-            <p>原来的友链单独保留下来了。</p>
+          <a href="/links" class="btn btn-outline gap-2">
+            <Icon name="lucide:link" class="w-4 h-4" />
+            <span>Visit links</span>
           </a>
-        </li>
-        <li>
-          <a href="/about">
-            <h3>About</h3>
-            <p>关于页也改成了官方博客布局的用法。</p>
-          </a>
-        </li>
-      </ul>
-    </main>
-    <Footer />
-  </body>
-</html>
+        </div>
+      </section>
+
+      <CardGroup cols="3">
+        <LinkCard
+          title="Blog"
+          desc="文章现在统一进入 Frosti 的内容系统，后面继续写长文、笔记和归档都会顺很多。"
+          url="/blog"
+          target="_self"
+          icon="lucide:notebook-pen"
+          categories={["Content", "Writing"]}
+        />
+        <LinkCard
+          title="Links"
+          desc="原博客的友链已经单独迁过来，结构更清楚，也更适合以后继续补。"
+          url="/links"
+          target="_self"
+          icon="lucide:link-2"
+          categories={["Friends", "Migration"]}
+        />
+        <LinkCard
+          title="About"
+          desc="这里会慢慢变成一个更像样的个人站点，而不只是一次性迁移结果。"
+          url="/about"
+          target="_self"
+          icon="lucide:user-round"
+          categories={["Site", "Profile"]}
+        />
+      </CardGroup>
+
+      <Card>
+        <div class="grid gap-4 md:grid-cols-3">
+          <div class="rounded-xl bg-base-200 p-4">
+            <div class="mb-2 text-sm font-semibold text-primary">Theme</div>
+            <p class="text-sm text-base-content/75">
+              站点已经接到 Frosti 的整套布局、深浅色主题和搜索能力上。
+            </p>
+          </div>
+          <div class="rounded-xl bg-base-200 p-4">
+            <div class="mb-2 text-sm font-semibold text-primary">Migration</div>
+            <p class="text-sm text-base-content/75">
+              旧博客真正需要留下来的图片和友链已经保住，后续内容继续往这里堆就行。
+            </p>
+          </div>
+          <div class="rounded-xl bg-base-200 p-4">
+            <div class="mb-2 text-sm font-semibold text-primary">Next</div>
+            <p class="text-sm text-base-content/75">
+              这次先把骨架换对，之后再慢慢补主题细节、栏目和更重的文章内容。
+            </p>
+          </div>
+        </div>
+      </Card>
+    </div>
+  </MainCard>
+</BaseLayout>

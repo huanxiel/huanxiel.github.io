@@ -1,19 +1,58 @@
 ---
-import AboutHeroImage from "../assets/about-hero.png";
-import BlogPost from "../layouts/BlogPost.astro";
+import { Icon } from "astro-icon/components";
+import MainCard from "@/components/MainCard.astro";
+import Card from "@/components/temple/Card.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
 
-<BlogPost
-  title="About"
-  description="About LMF"
-  pubDate={new Date("2026-06-27")}
-  heroImage={AboutHeroImage}
->
-  <p>LMF。</p>
-  <p>
-    这个站现在用 Astro 官方博客路线重建，目标不是一次性做满，而是留出以后写更重内容的空间。
-  </p>
-  <p>
-    目前迁过来的内容不多，主要是友链和图片资源。剩下的部分，可以在更干净的结构里慢慢长出来。
-  </p>
-</BlogPost>
+<BaseLayout title="About">
+  <MainCard
+    title="About LMF"
+    description="一个把旧博客收束进新结构里的个人站点，先站稳，再继续长。"
+    image="/images/legacy/wing.PNG"
+    infoIcon="lucide:user-round"
+  >
+    <div class="space-y-6">
+      <section class="space-y-4">
+        <p class="text-base-content/80">
+          这个站现在已经从旧博客迁到 Astro + Frosti。
+          目前迁过来的核心内容不多，主要是友链和一批原来文章里用过的图片资源。
+        </p>
+        <p class="text-base-content/80">
+          这么做不是因为以后只会放轻内容，而是想先把底座换成更适合长期写作和整理的结构。
+          后面无论是长文、笔记、归档还是更完整的页面，都可以继续往上长。
+        </p>
+      </section>
+
+      <div class="grid gap-4 md:grid-cols-2">
+        <Card>
+          <div class="space-y-3 p-1">
+            <div class="flex items-center gap-2 text-primary">
+              <Icon name="lucide:layout-template" class="w-5 h-5" />
+              <h2 class="text-lg font-semibold">Current shape</h2>
+            </div>
+            <ul class="list-disc space-y-2 pl-5 text-sm text-base-content/75">
+              <li>Frosti theme for the overall layout and interaction.</li>
+              <li>GitHub Pages deployment kept on the existing repository pipeline.</li>
+              <li>Migrated friend links and legacy images preserved under <code>/public/images/legacy</code>.</li>
+            </ul>
+          </div>
+        </Card>
+
+        <Card>
+          <div class="space-y-3 p-1">
+            <div class="flex items-center gap-2 text-primary">
+              <Icon name="lucide:rocket" class="w-5 h-5" />
+              <h2 class="text-lg font-semibold">Next step</h2>
+            </div>
+            <ul class="list-disc space-y-2 pl-5 text-sm text-base-content/75">
+              <li>Keep writing into the new blog content collection.</li>
+              <li>Continue refining the site voice and page mix over time.</li>
+              <li>Use the cleaner structure as the default place for heavier future content.</li>
+            </ul>
+          </div>
+        </Card>
+      </div>
+    </div>
+  </MainCard>
+</BaseLayout>

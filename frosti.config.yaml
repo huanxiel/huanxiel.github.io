@@ -1,0 +1,75 @@
+site:
+  tab: LMF
+  title: LMF
+  description: A personal blog rebuilt on Frosti for future long-form writing, migrated images, and friend links.
+  language: zh
+  favicon: /images/legacy/cross.jpg
+  theme:
+    light: winter
+    dark: dracula
+    code: github-dark
+  date_format: YYYY-MM-DD
+  blog:
+    pageSize: 6
+  menu:
+    - id: home
+      text: Home
+      href: /
+      svg: "material-symbols:home-outline-rounded"
+      target: _self
+    - id: blog
+      text: Blog
+      href: /blog
+      svg: "material-symbols:book-2-outline-rounded"
+      target: _self
+      subItems:
+        - id: all
+          text: All posts
+          href: /blog
+          svg: "material-symbols:ink-pen-outline-rounded"
+          target: _self
+        - id: notes
+          text: Notes
+          href: /blog/category/Notes
+          svg: "material-symbols:sticky-note-2-outline-rounded"
+          target: _self
+        - id: migration
+          text: Migration
+          href: /blog/category/Migration
+          svg: "material-symbols:compare-arrows-rounded"
+          target: _self
+    - id: links
+      text: Links
+      href: /links
+      svg: "material-symbols:link-rounded"
+      target: _self
+    - id: about
+      text: About
+      href: /about
+      svg: "material-symbols:info-outline-rounded"
+      target: _self
+
+user:
+  name: LMF
+  site: "https://huanxiel.github.io"
+  avatar: /images/legacy/qingzi.PNG
+  sidebar:
+    social:
+      - href: "https://github.com/huanxiel"
+        ariaLabel: Github
+        title: Github
+        svg: "ri:github-line"
+      - href: "/rss.xml"
+        ariaLabel: RSS
+        title: RSS
+        svg: "material-symbols:rss-feed-rounded"
+  footer:
+    social:
+      - href: "https://github.com/huanxiel"
+        ariaLabel: Github
+        title: Github
+        svg: "ri:github-line"
+      - href: "/rss.xml"
+        ariaLabel: RSS
+        title: RSS
+        svg: "material-symbols:rss-feed-rounded"

@@ -1,8 +1,9 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import { Icon } from "astro-icon/components";
+import LinkCard from "@/components/mdx/LinkCard.astro";
+import MainCard from "@/components/MainCard.astro";
+import CardGroup from "@/components/temple/CardGroup.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
 
 const friends = [
   "https://mylyn.cn",
@@ -10,57 +11,39 @@ const friends = [
   "http://blog.zerohzzzz.top",
   "https://unclezhou.top",
   "https://herveyb3b4.github.io",
-  "https://salt114514.github.io/"
+  "https://salt114514.github.io/",
 ];
 ---
 
-<!doctype html>
-<html lang="zh-CN">
-  <head>
-    <BaseHead title={`Links | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
-    <style>
-      ul {
-        list-style: none;
-        margin: 2rem 0 0;
-        padding: 0;
-        display: grid;
-        gap: 1rem;
-      }
+<BaseLayout title="Links">
+  <MainCard
+    title="Friend Links"
+    description="原博客留下来的友链现在集中放在这里，后面继续补也更清楚。"
+    textOverlay="LINKS"
+    infoIcon="lucide:link"
+  >
+    <div class="space-y-6">
+      <div class="flex items-center gap-2 text-primary">
+        <Icon name="lucide:users" class="w-5 h-5" />
+        <p class="text-sm font-medium">A small list carried over from the previous blog.</p>
+      </div>
 
-      li a {
-        display: block;
-        padding: 1rem 1.2rem;
-        border-radius: 12px;
-        background: white;
-        box-shadow: 0 2px 8px rgba(var(--black), 5%);
-        text-decoration: none;
-      }
-
-      small {
-        display: block;
-        margin-top: 0.25rem;
-        color: rgb(var(--gray));
-      }
-    </style>
-  </head>
-  <body>
-    <Header />
-    <main>
-      <h1>Friend Links</h1>
-      <p>原博客里的友链已经迁到这里，页面结构保持简单，后面继续加也不容易乱。</p>
-      <ul>
+      <CardGroup cols="2">
         {
-          friends.map((href) => (
-            <li>
-              <a href={href} target="_blank" rel="noreferrer">
-                {new URL(href).hostname.replace(/^www\./, "")}
-                <small>{href}</small>
-              </a>
-            </li>
-          ))
+          friends.map((href) => {
+            const hostname = new URL(href).hostname.replace(/^www\./, "");
+            return (
+              <LinkCard
+                title={hostname}
+                desc={href}
+                url={href}
+                icon="lucide:globe"
+                categories={["Friend Link"]}
+              />
+            );
+          })
         }
-      </ul>
-    </main>
-    <Footer />
-  </body>
-</html>
+      </CardGroup>
+    </div>
+  </MainCard>
+</BaseLayout>
