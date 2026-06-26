@@ -1,0 +1,23 @@
+---
+const today = new Date();
+---
+
+<footer>
+  <p>&copy; {today.getFullYear()} LMF. Built with Astro.</p>
+  <p>
+    Images and links survived the migration. The content can grow from here.
+  </p>
+</footer>
+
+<style>
+  footer {
+    padding: 2em 1em 6em 1em;
+    background: linear-gradient(var(--gray-gradient)) no-repeat;
+    color: rgb(var(--gray));
+    text-align: center;
+  }
+
+  footer p {
+    margin: 0.4em 0;
+  }
+</style>

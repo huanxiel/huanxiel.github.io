@@ -1,5 +1,8 @@
+import mdx from "@astrojs/mdx";
+import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  site: "https://huanxiel.github.io"
+  site: "https://huanxiel.github.io",
+  integrations: [mdx(), sitemap()]
 });

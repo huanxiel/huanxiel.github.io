@@ -1,67 +1,90 @@
 ---
-import { getCollection } from "astro:content";
-import BaseLayout from "../layouts/BaseLayout.astro";
-import PostCard from "../components/PostCard.astro";
-
-const posts = (await getCollection("posts", ({ data }) => !data.draft))
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
-
-const gallery = [
-  "/images/legacy/qingzi.PNG",
-  "/images/legacy/wing.PNG",
-  "/images/legacy/youqi.jpg"
-];
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 ---
 
-<BaseLayout title="LMF" description="A blog for long-form posts, notes, and future projects.">
-  <section class="hero">
-    <div class="hero-copy">
-      <p class="eyebrow">Blog</p>
-      <h1>Built for future long posts, not just a one-weekend refresh.</h1>
-      <p class="lede">
-        The structure is now Astro, the images came along, and the writing space is ready
-        to get much heavier from here.
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style>
+      .hero-image {
+        margin: 2rem 0;
+        border-radius: 12px;
+        box-shadow: var(--box-shadow);
+      }
+
+      .quick-links {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+        margin: 2rem 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .quick-links a {
+        display: block;
+        padding: 1rem;
+        border-radius: 12px;
+        background: white;
+        box-shadow: 0 2px 8px rgba(var(--black), 5%);
+        text-decoration: none;
+      }
+
+      .quick-links h3,
+      .quick-links p {
+        margin: 0;
+      }
+
+      .quick-links p {
+        margin-top: 0.4rem;
+        color: rgb(var(--gray));
+        font-size: 0.95rem;
+      }
+
+      @media (max-width: 720px) {
+        .quick-links {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <h1>LMF</h1>
+      <p>
+        现在这套站点已经改成官方 Astro blog 路线：内容用 content collections 管，
+        页面结构尽量贴近官方 starter，部署也会交给 GitHub Pages 官方工作流。
       </p>
-      <div class="hero-actions">
-        <a class="button-primary" href="/about">About</a>
-        <a class="button-secondary" href="/links">Friend Links</a>
-      </div>
-    </div>
-    <div class="hero-visual" aria-hidden="true">
-      <img class="hero-main" src="/images/legacy/qingzi.PNG" alt="" />
-      <img class="hero-side" src="/images/legacy/wing.PNG" alt="" />
-    </div>
-  </section>
-
-  <section class="panel">
-    <div class="section-heading">
-      <p class="eyebrow">Image Archive</p>
-      <h2>Legacy backgrounds, ready for new posts</h2>
-    </div>
-    <div class="gallery-grid">
-      {gallery.map((image) => (
-        <figure class="gallery-item">
-          <img src={image} alt="" loading="lazy" />
-        </figure>
-      ))}
-    </div>
-  </section>
-
-  <section class="panel">
-    <div class="section-heading">
-      <p class="eyebrow">Posts</p>
-      <h2>Start writing from a cleaner base</h2>
-    </div>
-    <div class="post-grid">
-      {posts.map((post) => (
-        <PostCard
-          href={`/posts/${post.slug}/`}
-          title={post.data.title}
-          description={post.data.description}
-          date={post.data.date.toLocaleDateString("zh-CN")}
-          cover={post.data.cover}
-        />
-      ))}
-    </div>
-  </section>
-</BaseLayout>
+      <p>
+        旧博客里真正值得迁过来的部分也还在：友链、图片资源，以及一个更适合以后写长文的起点。
+      </p>
+      <img class="hero-image" src="/images/legacy/qingzi.PNG" alt="" />
+      <ul class="quick-links">
+        <li>
+          <a href="/blog">
+            <h3>Blog</h3>
+            <p>文章现在统一走官方 blog 内容目录。</p>
+          </a>
+        </li>
+        <li>
+          <a href="/links">
+            <h3>Links</h3>
+            <p>原来的友链单独保留下来了。</p>
+          </a>
+        </li>
+        <li>
+          <a href="/about">
+            <h3>About</h3>
+            <p>关于页也改成了官方博客布局的用法。</p>
+          </a>
+        </li>
+      </ul>
+    </main>
+    <Footer />
+  </body>
+</html>

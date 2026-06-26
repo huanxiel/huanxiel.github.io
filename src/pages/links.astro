@@ -1,28 +1,66 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import FriendCard from "../components/FriendCard.astro";
-import { friends } from "../data/friends";
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+
+const friends = [
+  "https://mylyn.cn",
+  "https://Kendal-ming.github.io",
+  "http://blog.zerohzzzz.top",
+  "https://unclezhou.top",
+  "https://herveyb3b4.github.io",
+  "https://salt114514.github.io/"
+];
 ---
 
-<BaseLayout title="Friend Links | LMF" description="Friend links">
-  <section class="hero compact">
-    <div class="hero-copy">
-      <p class="eyebrow">Links</p>
-      <h1>Friend Links</h1>
-      <p class="lede">
-        The old blogroll made the jump. The page stays simple so it can scale as the
-        network grows.
-      </p>
-    </div>
-    <div class="hero-stack" aria-hidden="true">
-      <img src="/images/legacy/youqi.jpg" alt="" />
-      <img src="/images/legacy/sion.PNG" alt="" />
-    </div>
-  </section>
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <BaseHead title={`Links | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+    <style>
+      ul {
+        list-style: none;
+        margin: 2rem 0 0;
+        padding: 0;
+        display: grid;
+        gap: 1rem;
+      }
 
-  <section class="panel">
-    <div class="friend-grid">
-      {friends.map((friend) => <FriendCard href={friend} />)}
-    </div>
-  </section>
-</BaseLayout>
+      li a {
+        display: block;
+        padding: 1rem 1.2rem;
+        border-radius: 12px;
+        background: white;
+        box-shadow: 0 2px 8px rgba(var(--black), 5%);
+        text-decoration: none;
+      }
+
+      small {
+        display: block;
+        margin-top: 0.25rem;
+        color: rgb(var(--gray));
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <h1>Friend Links</h1>
+      <p>原博客里的友链已经迁到这里，页面结构保持简单，后面继续加也不容易乱。</p>
+      <ul>
+        {
+          friends.map((href) => (
+            <li>
+              <a href={href} target="_blank" rel="noreferrer">
+                {new URL(href).hostname.replace(/^www\./, "")}
+                <small>{href}</small>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,19 +1,19 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import AboutHeroImage from "../assets/about-hero.png";
+import BlogPost from "../layouts/BlogPost.astro";
 ---
 
-<BaseLayout title="About | LMF" description="About LMF">
-  <section class="hero compact">
-    <div class="hero-copy">
-      <p class="eyebrow">About</p>
-      <h1>LMF</h1>
-      <p class="lede">
-        A quieter blog that keeps room for denser writing later: notes, long posts,
-        and the occasional side project.
-      </p>
-    </div>
-    <div class="portrait-wrap">
-      <img class="portrait" src="/images/legacy/qingniao.PNG" alt="" />
-    </div>
-  </section>
-</BaseLayout>
+<BlogPost
+  title="About"
+  description="About LMF"
+  pubDate={new Date("2026-06-27")}
+  heroImage={AboutHeroImage}
+>
+  <p>LMF。</p>
+  <p>
+    这个站现在用 Astro 官方博客路线重建，目标不是一次性做满，而是留出以后写更重内容的空间。
+  </p>
+  <p>
+    目前迁过来的内容不多，主要是友链和图片资源。剩下的部分，可以在更干净的结构里慢慢长出来。
+  </p>
+</BlogPost>
